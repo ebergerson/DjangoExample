@@ -4,5 +4,7 @@ li a {
 }
 
 body {
-    background: white url("images/background.jpg") no-repeat;
+    /*background: white url("images/background.jpg") no-repeat;*/
+    /*background-image: linear-gradient(25deg,#d64c7f,#ee4758 50%);*/
+    background-image: linear-gradient(170deg, rgba(214, 184, 76, 0.47), rgba(71, 219, 238, 0.51) 80%);
 }
