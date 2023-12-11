@@ -1,10 +1,11 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>DjangoExample</title>
-</head>
-<body>
+{% load static %}
+
+<link rel="stylesheet" href="{% static 'polls/style.css' %}">
+
+{% block title %}
+    Django Example
+{% endblock %}
+
 {% if latest_question_list %}
     <ul>
         {% for question in latest_question_list %}
@@ -15,5 +16,3 @@
 {% else %}
     <p>No polls are available.</p>
 {% endif %}
-</body>
-</html>
