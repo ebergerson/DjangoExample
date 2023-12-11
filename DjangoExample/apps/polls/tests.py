@@ -4,19 +4,22 @@ from django.urls import reverse
 from django.utils import timezone
 from .models import Question
 
+
 class QuestionModelTests(TestCase):
     def setUp(self):
         now = timezone.now()
         Question.objects.create(question_text="Far Future", pub_date=now + datetime.timedelta(days=30))
-        Question.objects.create(question_text="More Than A Day Past", pub_date=now + datetime.timedelta(days=1, seconds=1))
-        Question.objects.create(question_text="Less Than A Day Past", pub_date=now - datetime.timedelta(hours=23, minutes=59, seconds=59))
+        Question.objects.create(question_text="More Than A Day Past",
+                                pub_date=now + datetime.timedelta(days=1, seconds=1))
+        Question.objects.create(question_text="Less Than A Day Past",
+                                pub_date=now - datetime.timedelta(hours=23, minutes=59, seconds=59))
 
     def test_was_published_recently_with_future_question(self):
         """
         was_published_recently() returns False for questions whose pub_date
         is in the future.
         """
-        future_question:Question = Question.objects.get(question_text="Far Future")
+        future_question: Question = Question.objects.get(question_text="Far Future")
         self.assertIs(future_question.was_published_recently(), False)
 
     def test_was_published_recently_with_old_question(self):
@@ -24,17 +27,17 @@ class QuestionModelTests(TestCase):
         was_published_recently() returns False for questions whose pub_date
         is older than 1 day.
         """
-        old_question:Question = Question.objects.get(question_text="More Than A Day Past")
+        old_question: Question = Question.objects.get(question_text="More Than A Day Past")
         self.assertIs(old_question.was_published_recently(), False)
-
 
     def test_was_published_recently_with_recent_question(self):
         """
         was_published_recently() returns True for questions whose pub_date
         is within the last day.
         """
-        recent_question:Question = Question.objects.get(question_text="Less Than A Day Past")
+        recent_question: Question = Question.objects.get(question_text="Less Than A Day Past")
         self.assertIs(recent_question.was_published_recently(), True)
+
 
 # This is bad just leaving a function out here - Eric
 def create_question(question_text, days):
